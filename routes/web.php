@@ -44,5 +44,35 @@ Route::group(
 
             return redirect()->route('translate')->with('success', 'Perubahan telah disimpan.');
         })->name('translate.update');
+        // product
+        Route::get('/product/{id}', function () {
+            $datas = Product::findOrFail(request()->id);
+            return view('product', compact('datas'));
+        })->name('product');
+        Route::put('/product/update/{id}', function () {
+            $product = Product::findOrFail(request()->id);
+
+            $product->setTranslation('nama', 'id', request()->input('nama.id'));
+            $product->setTranslation('nama', 'en', request()->input('nama.en'));
+            $product->setTranslation('nama', 'pl', request()->input('nama.pl'));
+
+            $product->setTranslation('harga', 'id', request()->input('harga.id'));
+            $product->setTranslation('harga', 'en', request()->input('harga.en'));
+            $product->setTranslation('harga', 'pl', request()->input('harga.pl'));
+
+            $product->qty = request()->input('qty');
+
+            $product->setTranslation('satuan', 'id', request()->input('satuan.id'));
+            $product->setTranslation('satuan', 'en', request()->input('satuan.en'));
+            $product->setTranslation('satuan', 'pl', request()->input('satuan.pl'));
+
+            $product->setTranslation('deskripsi', 'id', request()->input('deskripsi.id'));
+            $product->setTranslation('deskripsi', 'en', request()->input('deskripsi.en'));
+            $product->setTranslation('deskripsi', 'pl', request()->input('deskripsi.pl'));
+
+            $product->save();
+
+            return redirect()->route('product', request()->id)->with('success', 'Perubahan telah disimpan.');
+        })->name('product.update');
     }
 );
