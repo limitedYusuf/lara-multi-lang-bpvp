@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use App\Models\Translate;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -23,7 +24,8 @@ Route::group(
     function () {
         // home
         Route::get('/', function () {
-            return view('welcome');
+            $products = Product::all();
+            return view('welcome', compact('products'));
         })->name('home');
         // translate
         Route::get('/translate', function () {
