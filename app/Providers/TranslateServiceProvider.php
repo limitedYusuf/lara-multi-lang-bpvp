@@ -42,6 +42,6 @@ class TranslateServiceProvider extends ServiceProvider
             }
         }
 
-        Log::info('TranslateServiceProvider is running');
+        // Log::info('TranslateServiceProvider is running');
     }
 }
